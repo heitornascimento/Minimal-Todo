@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.avjindersinghsekhon.minimaltodo.Analytics.AnalyticsApplication;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultFragment;
 import com.example.avjindersinghsekhon.minimaltodo.Main.MainActivity;
 import com.example.avjindersinghsekhon.minimaltodo.Main.MainFragment;
@@ -47,13 +46,10 @@ public class ReminderFragment extends AppDefaultFragment {
     public static final String EXIT = "com.avjindersekhon.exit";
     private TextView mSnoozeTextView;
     String theme;
-    AnalyticsApplication app;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        app = (AnalyticsApplication) getActivity().getApplication();
-        app.send(this);
 
         theme = getActivity().getSharedPreferences(MainFragment.THEME_PREFERENCES, MODE_PRIVATE).getString(MainFragment.THEME_SAVED, MainFragment.LIGHTTHEME);
         if (theme.equals(MainFragment.LIGHTTHEME)) {
@@ -99,7 +95,6 @@ public class ReminderFragment extends AppDefaultFragment {
         mRemoveToDoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                app.send(this, "Action", "Todo Removed from Reminder Activity");
                 mToDoItems.remove(mItem);
                 changeOccurred();
                 saveData();
@@ -150,7 +145,6 @@ public class ReminderFragment extends AppDefaultFragment {
     }
 
     private Date addTimeToDate(int mins) {
-        app.send(this, "Action", "Snoozed", "For " + mins + " minutes");
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
