@@ -1,9 +1,7 @@
 package com.example.avjindersinghsekhon.minimaltodo.Main;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -12,127 +10,89 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.sumup.payment.PaymentExecutorImpl;
+import com.app.sumup.payment.SumUpDemoLogin;
 import com.app.sumup.payment.entity.PaymentParam;
 import com.example.avjindersinghsekhon.minimaltodo.About.AboutActivity;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Base.BaseView;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Presenter.PaymentPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.Settings.SettingsActivity;
+import com.sumup.data.api.SumUpEndpoint;
 import com.sumup.merchant.api.SumUpAPI;
-import com.sumup.merchant.api.SumUpPayment;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+import javax.inject.Inject;
 
-public class MainActivity extends AppDefaultActivity {
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+
+public class MainActivity extends AppDefaultActivity implements BaseView, HasSupportFragmentInjector {
 
 
     private static final String KEY = "b18d7ae1-455d-4a58-8299-0e684c60c51c";
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+
+
+    PaymentPresenter mPaymentPresenter;
+
+    @Inject
+    SumUpEndpoint sumUpEndpoint;
+
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        final android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        final android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
-        //SumUpAPI.logout();
+        SumUpDemoLogin login = new SumUpDemoLogin();
+        login.startAuthentication(this);
 
-
-//        SumUpLogin login =
-//                SumUpLogin.builder("b18d7ae1-455d-4a58-8299-0e684c60c51c").build();
-//
-//        SumUpAPI.openLoginActivity(MainActivity.this, login ,1);
-//
-
+        mPaymentPresenter = new PaymentPresenter(new PaymentExecutorImpl(), this);
 
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
+        mPaymentPresenter.onResume();
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                 pay();
-//
-//                Intent payIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-//                        "sumupmerchant://pay/1.0"
-//                                + "?affiliate-key=" + KEY + ""
-//                                + "&app-id=com.avjindersinghsekhon.minimaltodo"
-//                                + "&amount=1.23"
-//                                + "&currency=BRL"
-//                                + "&title=Taxi Ride"
-//                                + "&receipt-mobilephone=+3531234567890"
-//                                + "&receipt-email=customer@mail.com"
-//                                + "&foreign-tx-id=" + UUID.randomUUID().toString()
-//                                // optional: skip the success screen
-//                                + "&skip-screen-success=true"
-//                                + "&callback=mycallbackscheme://result"));
-
-                // startActivity(payIntent);
-
-
-            }
-        }, 300);
-
-
-
-
+        if (sumUpEndpoint != null) {
+            Log.i("sumup", "Nao nulo!!!");
+        }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        //SumUpAPI.Response.ResultCode.
-//        Log.i("sumup", "requet " + requestCode + " result code " + resultCode);
-//        //if(requestCode == 1 && resultCode == SumUpAPI.Response.ResultCode.SUCCESSFUL){
-//        pay();
-//        //settings();
-//        //}
-//    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mPaymentPresenter.onPause();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("sumup", "requet " + requestCode + " result code " + resultCode);
+        if (requestCode == 1 && resultCode == SumUpAPI.Response.ResultCode.SUCCESSFUL) {
+            pay();
+        }
+    }
+
+    /**
+     *
+     */
     private void pay() {
-
-        PaymentExecutorImpl paymentExecutor = new PaymentExecutorImpl();
         PaymentParam paymentParam = new
                 PaymentParam(2.4d, "ad", "ads");
-        paymentExecutor.pay(MainActivity.this, paymentParam);
-
-
-//        SumUpPayment payment = SumUpPayment.builder()
-//                // mandatory parameters
-//                //mandatory parameters
-//                // Please go to https://me.sumup.com/developers to get your Affiliate Key by entering the application ID of your app. (e.g. com.sumup.sdksampleapp)
-//                .affiliateKey("b18d7ae1-455d-4a58-8299-0e684c60c51c")
-//                .productAmount(1.23)
-//                .currency(SumUpPayment.Currency.EUR)
-//                // optional: add details
-//                .productTitle("Taxi Ride")
-//                .receiptEmail("customer@mail.com")
-//                .receiptSMS("+3531234567890")
-//                // optional: Add metadata
-//                .addAdditionalInfo("AccountId", "taxi0334")
-//                .addAdditionalInfo("From", "Paris")
-//                .addAdditionalInfo("To", "Berlin")
-//                //optional: foreign transaction ID, must be unique!
-//                .foreignTransactionId(UUID.randomUUID().toString())  // can not exceed 128 chars
-//                // optional: skip the success screen
-//                .skipSuccessScreen()
-//                .build();
-//
-//
-//        SumUpAPI.openPaymentActivity(MainActivity.this, payment, 2);
-
+        mPaymentPresenter.pay(MainActivity.this, paymentParam);
     }
 
-    private void settings() {
-        //SumUpAPI.openPaymentSettingsActivity(MainActivity.this, 3);
-    }
 
     @Override
     protected int contentViewLayoutRes() {
@@ -184,6 +144,15 @@ public class MainActivity extends AppDefaultActivity {
         }
     }
 
+    @Override
+    public void onError(int code, String message) {
+        //SHOW ALERT
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
 }
 
 

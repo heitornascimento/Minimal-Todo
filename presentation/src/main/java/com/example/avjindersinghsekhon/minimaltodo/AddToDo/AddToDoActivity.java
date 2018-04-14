@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
-import com.example.avjindersinghsekhon.minimaltodo.Payment.PaymentFragment;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.PaymentFragment;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 
 public class AddToDoActivity extends AppDefaultActivity {

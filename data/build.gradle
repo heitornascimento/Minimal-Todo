@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "SUMUP_URL", "\" https://receipts-ng.sumup.com\""
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation 'com.android.support:appcompat-v7:27.1.0'
+//    testImplementation 'junit:junit:4.12'
+
+
+    def dataDependencies = rootProject.ext.dataDependencies
+
+    implementation dataDependencies.rx_java
+    implementation dataDependencies.rx_android
+    implementation dataDependencies.rxAdapter
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofit_gson_converter
+    implementation dataDependencies.okhttp_log_interceptor
+
+}

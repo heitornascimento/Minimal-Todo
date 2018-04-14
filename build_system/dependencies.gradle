@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+}
+
+
+ext{
+
+    rxAndroid = '2.0.1'
+    rxJava = '2.1.5'
+    rxAdapter = "2.2.0"
+    gson = '2.8.0'
+    retrofit = '2.0.2'
+    okhttp = '3.7.0'
+    okhttp_log_interceptor = '3.9.1'
+    supportLibraryVersion = '27.1.0'
+    dagger = '2.14.1'
+    javax_annotation = '1.0'
+    javax_inject = '1'
+
+    dataDependencies = [
+            retrofit:                           "com.squareup.retrofit2:retrofit:${retrofit}",
+            retrofit_gson_converter:            "com.squareup.retrofit2:converter-gson:${retrofit}",
+            okhttp_log_interceptor:             "com.squareup.okhttp3:logging-interceptor:${okhttp_log_interceptor}",
+            rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
+            rx_android:                         "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            rxAdapter:                          "com.squareup.retrofit2:adapter-rxjava2:${rxAdapter}",
+            android_annotation:                 "com.android.support:support-annotations:${supportLibraryVersion}"
+    ]
+
+    presentationDependencies = [
+            dagger: "com.google.dagger:dagger:$dagger",
+            dagger_annonation: "com.google.dagger:dagger-compiler:$dagger",
+            android_dagger: "com.google.dagger:dagger-android-support:$dagger",
+            javax_annotation: "javax.annotation:jsr250-api:$javax_annotation",
+            javax_inject: "javax.inject:javax.inject:$javax_inject",
+            dagger_processor: "com.google.dagger:dagger-android-processor:$dagger"
+    ]
+
+}

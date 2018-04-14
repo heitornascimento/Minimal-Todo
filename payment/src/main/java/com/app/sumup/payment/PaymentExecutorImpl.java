@@ -4,38 +4,29 @@ import android.app.Activity;
 
 import com.app.sumup.payment.contract.PaymentExecutor;
 import com.app.sumup.payment.entity.PaymentParam;
+import com.app.sumup.payment.exception.SumUpDemoException;
 import com.sumup.merchant.api.SumUpAPI;
 import com.sumup.merchant.api.SumUpPayment;
 
-import java.util.UUID;
+import java.math.BigDecimal;
 
 public class PaymentExecutorImpl implements PaymentExecutor {
 
 
     @Override
-    public void pay(Activity target, PaymentParam param) {
+    public void pay(Activity target, PaymentParam param)  {
+
+        if (param == null) {
+            throw new RuntimeException("param cannot be null");
+        }
+
         SumUpPayment payment = SumUpPayment.builder()
-                // mandatory parameters
-                //mandatory parameters
-                // Please go to https://me.sumup.com/developers to get your Affiliate Key by entering the application ID of your app. (e.g. com.sumup.sdksampleapp)
-                .affiliateKey("b18d7ae1-455d-4a58-8299-0e684c60c51c")
-                .productAmount(param.getProductAmount())
-                .currency(SumUpPayment.Currency.BRL)
-                // optional: add details
-                .productTitle("Taxi Ride")
-                .receiptEmail(param.getReceiptEmail())
-                .receiptSMS(param.getReceiptSms())
-                // optional: Add metadata
-                .addAdditionalInfo("AccountId", "taxi0334")
-                .addAdditionalInfo("From", "Paris")
-                .addAdditionalInfo("To", "Berlin")
-                //optional: foreign transaction ID, must be unique!
-                .foreignTransactionId(UUID.randomUUID().toString())  // can not exceed 128 chars
-                // optional: skip the success screen
-                .skipSuccessScreen()
+                .total(new BigDecimal(param.getProductAmount()))
+                .currency(SumUpPayment.Currency.EUR)
                 .build();
 
+        SumUpAPI.checkout(target, payment, 2);
 
-        SumUpAPI.openPaymentActivity(target, payment, 2);
+
     }
 }

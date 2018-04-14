@@ -17,8 +17,15 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "AFFLIATE_CODE", "\"6221de10-fdc1-465c-9ea4-4933ae8437da\""
+        }
+        debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "AFFLIATE_CODE", "\"6221de10-fdc1-465c-9ea4-4933ae8437da\""
+
         }
     }
 
@@ -28,5 +35,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:27.0.2'
 
-    compile 'com.sumup:merchant-api:1.3.1'
+    compile 'com.sumup:merchant-sdk:3.0.0'
 }
