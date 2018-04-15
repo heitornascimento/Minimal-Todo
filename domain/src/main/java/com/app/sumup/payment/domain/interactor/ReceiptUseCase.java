@@ -1,5 +1,6 @@
 package com.app.sumup.payment.domain.interactor;
 
+import com.app.sumup.payment.domain.exception.SumUpInvalidParamReceiptException;
 import com.app.sumup.payment.domain.model.ReceiptParam;
 import com.app.sumup.payment.domain.repository.ReceiptRepository;
 
@@ -15,8 +16,19 @@ public class ReceiptUseCase extends UseCase {
     }
 
     @Override
-    public Single buildObservable(Object o) {
+    public Single buildObservable(Object o) throws SumUpInvalidParamReceiptException {
         ReceiptParam receiptParam = (ReceiptParam) o;
+
+        if((receiptParam.getMerchantCode() == null
+                || receiptParam.getMerchantCode().isEmpty())){
+            throw  new SumUpInvalidParamReceiptException("Mercant Code cannot be null");
+        }
+
+        if((receiptParam.getTransactionCode() == null
+                || receiptParam.getTransactionCode().isEmpty())){
+            throw  new SumUpInvalidParamReceiptException("Transaction Code cannot be null");
+        }
+
         return  mReceiptRepository.loadReceipt(receiptParam);
     }
 }

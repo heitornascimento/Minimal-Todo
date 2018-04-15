@@ -30,7 +30,15 @@
         <activity
             android:name=".AddToDo.AddToDoActivity"
             android:parentActivityName=".Main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity
             android:name=".About.AboutActivity"
             android:label="@string/app_name"
@@ -48,18 +56,19 @@
         <activity
             android:name=".Main.PaymentResponseActivity"
             android:label="@string/title_activity_payment_response">
-
             <intent-filter>
-            <action android:name="android.intent.action.VIEW"/>
-            <action android:name="com.example.avjindersinghsekhon.minimaltodo.Main.PaymentResponseActivity"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-            <category android:name="android.intent.category.BROWSABLE"/>
-            <!-- Provide your own scheme here and reference it when you make a payment -->
-            <data
-                android:scheme="mycallbackscheme"
-                android:host="result"/>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="com.example.avjindersinghsekhon.minimaltodo.Main.PaymentResponseActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Provide your own scheme here and reference it when you make a payment -->
+                <data
+                    android:host="result"
+                    android:scheme="mycallbackscheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".SumUp.View.Activity.ReceiptDetailsActivity"></activity>
     </application>
 
 </manifest>

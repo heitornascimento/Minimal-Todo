@@ -1,6 +1,6 @@
 package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Builder;
 
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.PaymentFragment;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.PaymentFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

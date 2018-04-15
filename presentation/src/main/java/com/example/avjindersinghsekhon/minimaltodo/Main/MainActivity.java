@@ -9,40 +9,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.app.sumup.payment.PaymentExecutorImpl;
 import com.app.sumup.payment.SumUpDemoLogin;
-import com.app.sumup.payment.entity.PaymentParam;
 import com.example.avjindersinghsekhon.minimaltodo.About.AboutActivity;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.Settings.SettingsActivity;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BaseView;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.PaymentPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.ReceiptPresenter;
-import com.sumup.data.api.SumUpEndpoint;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.ReceiptFragment;
 import com.sumup.merchant.api.SumUpAPI;
 
 import javax.inject.Inject;
 
-import dagger.Provides;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends AppDefaultActivity implements BaseView, HasSupportFragmentInjector {
+public class MainActivity extends AppDefaultActivity  {
 
     private static final String KEY = "b18d7ae1-455d-4a58-8299-0e684c60c51c";
 
-    @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-
-    @Inject
-    ReceiptPresenter receiptPresenter;
-
 
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         final android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,47 +39,20 @@ public class MainActivity extends AppDefaultActivity implements BaseView, HasSup
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
-
-        SumUpDemoLogin login = new SumUpDemoLogin();
-        //login.startAuthentication(this);
-
-        //mPaymentPresenter = new PaymentPresenter(new PaymentExecutorImpl(), this);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-       // mPaymentPresenter.onResume();
-
-        receiptPresenter.loadPaymentReceipt("TCX9APHT2Z", "M4AR96RP");
-
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-       // mPaymentPresenter.onPause();
+        initLogin();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("sumup", "requet " + requestCode + " result code " + resultCode);
         if (requestCode == 1 && resultCode == SumUpAPI.Response.ResultCode.SUCCESSFUL) {
-            pay();
+//            try {
+//                mReceiptPresenter.subscribePaymentReceipt("TCX9APHT2Z", "M4AR96RP");
+//            } catch (SumUpInvalidParamReceiptException e) {
+//                //ShowError
+//            }
         }
     }
-
-    /**
-     *
-     */
-    private void pay() {
-        PaymentParam paymentParam = new
-                PaymentParam(2.4d, "ad", "ads");
-       // mPaymentPresenter.pay(MainActivity.this, paymentParam);
-    }
-
 
     @Override
     protected int contentViewLayoutRes() {
@@ -100,7 +62,7 @@ public class MainActivity extends AppDefaultActivity implements BaseView, HasSup
     @NonNull
     @Override
     protected Fragment createInitialFragment() {
-        return MainFragment.newInstance();
+        return ReceiptFragment.newInstance();
     }
 
     @Override
@@ -142,15 +104,11 @@ public class MainActivity extends AppDefaultActivity implements BaseView, HasSup
         }
     }
 
-    @Override
-    public void onError(int code, String message) {
-        //SHOW ALERT
+    private void initLogin() {
+        SumUpDemoLogin login = new SumUpDemoLogin();
+        login.startAuthentication(this);
     }
 
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return fragmentDispatchingAndroidInjector;
-    }
 }
 
 

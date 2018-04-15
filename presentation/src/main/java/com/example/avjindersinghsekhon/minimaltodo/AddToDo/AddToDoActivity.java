@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
 import com.example.avjindersinghsekhon.minimaltodo.R;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.PaymentFragment;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.ReceiptFragment;
 
 public class AddToDoActivity extends AppDefaultActivity {
     @SuppressWarnings("deprecation")
@@ -23,7 +23,7 @@ public class AddToDoActivity extends AppDefaultActivity {
     @NonNull
     @Override
     protected Fragment createInitialFragment() {
-        return PaymentFragment.newInstance();
+        return ReceiptFragment.newInstance();
     }
 
     @Override

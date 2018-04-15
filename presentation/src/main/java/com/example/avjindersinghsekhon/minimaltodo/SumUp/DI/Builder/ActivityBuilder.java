@@ -1,6 +1,6 @@
 package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Builder;
 
-import com.example.avjindersinghsekhon.minimaltodo.Main.MainActivity;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Activity.ReceiptDetailsActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
-    abstract MainActivity bindMainActivity();
+    abstract ReceiptDetailsActivity bindMainActivity();
 
 }

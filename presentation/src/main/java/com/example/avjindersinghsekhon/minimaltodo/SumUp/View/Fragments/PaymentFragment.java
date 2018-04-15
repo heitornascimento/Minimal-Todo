@@ -1,4 +1,4 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments;
 
 
 import android.os.Bundle;

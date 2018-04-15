@@ -21,6 +21,14 @@ ext{
     javax_annotation = '1.0'
     javax_inject = '1'
 
+    //Testing
+    jUnitVersion = '4.12'
+    assertJVersion = '1.7.1'
+    mockitoVersion = '1.9.5'
+    dexmakerVersion = '1.0'
+    espressoVersion = '2.0'
+    testingSupportLibVersion = '0.1'
+
     dataDependencies = [
             retrofit:                           "com.squareup.retrofit2:retrofit:${retrofit}",
             retrofit_gson_converter:            "com.squareup.retrofit2:converter-gson:${retrofit}",
@@ -47,6 +55,12 @@ ext{
             rx_android:                         "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
             android_annotation:                 "com.android.support:support-annotations:${supportLibraryVersion}",
             gson:                               "com.google.code.gson:gson:$gson"
+    ]
+
+    domainTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}"
     ]
 
 }

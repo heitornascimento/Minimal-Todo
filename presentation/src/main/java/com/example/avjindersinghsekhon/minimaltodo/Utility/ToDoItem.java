@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.UUID;
 
 public class ToDoItem implements Serializable {
+
+    
     private String mToDoText;
     private boolean mHasReminder;
     //    private Date mLastEdited;
