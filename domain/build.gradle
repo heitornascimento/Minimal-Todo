@@ -4,5 +4,16 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+
+    def domainDependencies = rootProject.ext.domainDependencies
+
+    implementation domainDependencies.rx_java
+    implementation domainDependencies.rx_android
+    implementation domainDependencies.android_annotation
+    implementation domainDependencies.gson
+
+}

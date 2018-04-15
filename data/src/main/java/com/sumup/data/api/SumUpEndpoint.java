@@ -1,6 +1,7 @@
 package com.sumup.data.api;
 
-import io.reactivex.Observable;
+import com.app.sumup.payment.domain.model.receipt.PaymentReceipt;
+
 import io.reactivex.Single;
 
 public class SumUpEndpoint {
@@ -11,7 +12,7 @@ public class SumUpEndpoint {
         this.mSumUpService = sumUpService;
     }
 
-    public Observable<Single> loadReceipt(final String transactionCode, final String merchantCode) {
+    public Single<PaymentReceipt> loadReceipt(final String transactionCode, final String merchantCode) {
         return mSumUpService.loadReceipt(transactionCode, merchantCode);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp;
 
 
 import android.os.Bundle;

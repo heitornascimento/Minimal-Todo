@@ -1,8 +1,8 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Component;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Component;
 
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Builder.ActivityBuilder;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Builder.FragmentBuilder;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Module.ApplicationModule;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Builder.ActivityBuilder;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Builder.FragmentBuilder;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Module.ApplicationModule;
 import com.example.avjindersinghsekhon.minimaltodo.SumUpApplication;
 
 import javax.inject.Singleton;

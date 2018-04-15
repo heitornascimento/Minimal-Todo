@@ -1,13 +1,12 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Presenter;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.app.sumup.payment.PaymentExecutorImpl;
 import com.app.sumup.payment.entity.PaymentParam;
-import com.app.sumup.payment.exception.SumUpDemoException;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Base.BasePresenter;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Base.BaseView;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BasePresenter;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BaseView;
 
 public class PaymentPresenter implements BasePresenter {
 
@@ -42,6 +41,8 @@ public class PaymentPresenter implements BasePresenter {
         }
 
     }
+
+
 
     @Override
     public void onResume() {

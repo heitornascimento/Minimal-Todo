@@ -1,4 +1,4 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Builder;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Builder;
 
 import com.example.avjindersinghsekhon.minimaltodo.Main.MainActivity;
 

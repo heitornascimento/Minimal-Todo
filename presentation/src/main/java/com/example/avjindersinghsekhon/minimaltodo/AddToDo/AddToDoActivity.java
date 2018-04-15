@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.PaymentFragment;
 import com.example.avjindersinghsekhon.minimaltodo.R;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.PaymentFragment;
 
 public class AddToDoActivity extends AppDefaultActivity {
     @SuppressWarnings("deprecation")

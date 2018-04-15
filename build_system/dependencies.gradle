@@ -28,7 +28,8 @@ ext{
             rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
             rx_android:                         "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
             rxAdapter:                          "com.squareup.retrofit2:adapter-rxjava2:${rxAdapter}",
-            android_annotation:                 "com.android.support:support-annotations:${supportLibraryVersion}"
+            android_annotation:                 "com.android.support:support-annotations:${supportLibraryVersion}",
+            gson:                               "com.google.code.gson:gson:$gson"
     ]
 
     presentationDependencies = [
@@ -37,7 +38,15 @@ ext{
             android_dagger: "com.google.dagger:dagger-android-support:$dagger",
             javax_annotation: "javax.annotation:jsr250-api:$javax_annotation",
             javax_inject: "javax.inject:javax.inject:$javax_inject",
-            dagger_processor: "com.google.dagger:dagger-android-processor:$dagger"
+            dagger_processor: "com.google.dagger:dagger-android-processor:$dagger",
+            rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
+    ]
+
+    domainDependencies = [
+            rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
+            rx_android:                         "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            android_annotation:                 "com.android.support:support-annotations:${supportLibraryVersion}",
+            gson:                               "com.google.code.gson:gson:$gson"
     ]
 
 }

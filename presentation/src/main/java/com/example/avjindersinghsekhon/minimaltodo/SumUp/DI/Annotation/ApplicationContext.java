@@ -1,4 +1,4 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.DI.Annotation;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,4 +1,4 @@
-package com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Base;
+package com.example.avjindersinghsekhon.minimaltodo.SumUp.Base;
 
 public interface BasePresenter {
 

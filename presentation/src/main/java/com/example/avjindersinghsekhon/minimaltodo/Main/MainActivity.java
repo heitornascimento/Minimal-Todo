@@ -14,15 +14,17 @@ import com.app.sumup.payment.SumUpDemoLogin;
 import com.app.sumup.payment.entity.PaymentParam;
 import com.example.avjindersinghsekhon.minimaltodo.About.AboutActivity;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Base.BaseView;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Payment.Presenter.PaymentPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.Settings.SettingsActivity;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BaseView;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.PaymentPresenter;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.ReceiptPresenter;
 import com.sumup.data.api.SumUpEndpoint;
 import com.sumup.merchant.api.SumUpAPI;
 
 import javax.inject.Inject;
 
+import dagger.Provides;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -30,17 +32,14 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class MainActivity extends AppDefaultActivity implements BaseView, HasSupportFragmentInjector {
 
-
     private static final String KEY = "b18d7ae1-455d-4a58-8299-0e684c60c51c";
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-
-    PaymentPresenter mPaymentPresenter;
-
     @Inject
-    SumUpEndpoint sumUpEndpoint;
+    ReceiptPresenter receiptPresenter;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
@@ -53,27 +52,26 @@ public class MainActivity extends AppDefaultActivity implements BaseView, HasSup
         }
 
         SumUpDemoLogin login = new SumUpDemoLogin();
-        login.startAuthentication(this);
+        //login.startAuthentication(this);
 
-        mPaymentPresenter = new PaymentPresenter(new PaymentExecutorImpl(), this);
+        //mPaymentPresenter = new PaymentPresenter(new PaymentExecutorImpl(), this);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPaymentPresenter.onResume();
+       // mPaymentPresenter.onResume();
 
-        if (sumUpEndpoint != null) {
-            Log.i("sumup", "Nao nulo!!!");
-        }
+        receiptPresenter.loadPaymentReceipt("TCX9APHT2Z", "M4AR96RP");
+
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        mPaymentPresenter.onPause();
+       // mPaymentPresenter.onPause();
     }
 
     @Override
@@ -90,7 +88,7 @@ public class MainActivity extends AppDefaultActivity implements BaseView, HasSup
     private void pay() {
         PaymentParam paymentParam = new
                 PaymentParam(2.4d, "ad", "ads");
-        mPaymentPresenter.pay(MainActivity.this, paymentParam);
+       // mPaymentPresenter.pay(MainActivity.this, paymentParam);
     }
 
 
