@@ -3,9 +3,11 @@ package com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Module;
 
 import android.content.Context;
 
+import com.app.sumup.payment.PaymentExecutorImpl;
 import com.app.sumup.payment.domain.interactor.ReceiptUseCase;
 import com.app.sumup.payment.domain.repository.ReceiptRepository;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Annotation.ApplicationContext;
+import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.PaymentPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.ReceiptPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUpApplication;
 import com.sumup.data.Injector;
@@ -48,6 +50,12 @@ public class ApplicationModule {
     @Provides
     public ReceiptPresenter provideReceitpPresenter(ReceiptUseCase receiptUseCase) {
         return new ReceiptPresenter(receiptUseCase);
+    }
+
+    @Provides
+    public PaymentPresenter providePaymentPresenter() {
+        PaymentExecutorImpl paymentExecutor = new PaymentExecutorImpl();
+        return new PaymentPresenter(paymentExecutor);
     }
 
 

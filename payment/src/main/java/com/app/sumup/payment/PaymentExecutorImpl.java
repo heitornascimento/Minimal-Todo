@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import com.app.sumup.payment.contract.PaymentExecutor;
 import com.app.sumup.payment.entity.PaymentParam;
-import com.app.sumup.payment.exception.SumUpDemoException;
 import com.sumup.merchant.api.SumUpAPI;
 import com.sumup.merchant.api.SumUpPayment;
 

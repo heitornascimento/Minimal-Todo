@@ -67,5 +67,8 @@ dependencies {
     //==== RXJava
     implementation presentationDependencies.rx_java
 
+    //=== ButterKnife
+    implementation presentationDependencies.butterknife
+    annotationProcessor presentationDependencies.annotation_butterknife
 
 }

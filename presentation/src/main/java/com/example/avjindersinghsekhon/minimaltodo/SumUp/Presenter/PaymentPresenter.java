@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.app.sumup.payment.PaymentExecutorImpl;
 import com.app.sumup.payment.entity.PaymentParam;
+import com.app.sumup.payment.exception.SumUpDemoException;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BasePresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BaseView;
 
@@ -12,20 +13,19 @@ public class PaymentPresenter implements BasePresenter {
 
     private PaymentExecutorImpl mPaymentExecutor;
 
-    private BaseView mPaymentView;
 
-    private boolean isResume;
+    private boolean isResume = true;
 
-    public PaymentPresenter(PaymentExecutorImpl paymentExecutor, BaseView paymentView) {
+    public PaymentPresenter(PaymentExecutorImpl paymentExecutor) {
         this.mPaymentExecutor = paymentExecutor;
-        this.mPaymentView = paymentView;
     }
 
-    public void pay(@NonNull Activity target, @NonNull PaymentParam param) {
+
+    public void pay(@NonNull Activity target, @NonNull PaymentParam param) throws SumUpDemoException {
 
         if ((param == null) || param.getProductAmount() < 0 ||
                 param.getReceiptEmail().isEmpty() || param.getReceiptSms().isEmpty()) {
-            mPaymentView.onError(1, "");
+            throw new SumUpDemoException("PaymentExecutor cannot be null");
         }
 
         if (mPaymentExecutor == null) {
@@ -41,7 +41,6 @@ public class PaymentPresenter implements BasePresenter {
         }
 
     }
-
 
 
     @Override

@@ -3,6 +3,7 @@ package com.example.avjindersinghsekhon.minimaltodo;
 import android.app.Activity;
 import android.app.Application;
 
+//import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Component.DaggerApplicationComponent;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Component.DaggerApplicationComponent;
 import com.sumup.merchant.api.SumUpState;
 

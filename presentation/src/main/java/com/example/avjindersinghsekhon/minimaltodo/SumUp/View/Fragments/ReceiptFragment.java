@@ -22,16 +22,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.app.sumup.payment.domain.model.receipt.MerchantData;
 import com.app.sumup.payment.domain.model.receipt.MerchantProfile;
 import com.app.sumup.payment.domain.model.receipt.PaymentReceipt;
 import com.app.sumup.payment.domain.model.receipt.TransactionData;
+import com.example.avjindersinghsekhon.minimaltodo.AddToDo.AddToDoActivity;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultFragment;
 import com.example.avjindersinghsekhon.minimaltodo.Main.CustomRecyclerScrollViewListener;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Activity.ReceiptDetailsActivity;
 import com.example.avjindersinghsekhon.minimaltodo.Utility.ItemTouchHelperClass;
 import com.example.avjindersinghsekhon.minimaltodo.Utility.RecyclerViewEmptySupport;
+import com.example.avjindersinghsekhon.minimaltodo.Utility.ToDoItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,6 +129,19 @@ public class ReceiptFragment extends AppDefaultFragment {
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
         mRecyclerView.setAdapter(adapter);
+
+        mAddToDoItemFAB.setOnClickListener(new View.OnClickListener() {
+
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onClick(View v) {
+                Intent newTodo = new Intent(getContext(), AddToDoActivity.class);
+                ToDoItem item = new ToDoItem("", false, null);
+                int color = ColorGenerator.MATERIAL.getRandomColor();
+                item.setTodoColor(color);
+                startActivity(newTodo);
+            }
+        });
     }
 
 
@@ -182,7 +198,7 @@ public class ReceiptFragment extends AppDefaultFragment {
 
             holder.linearLayout.setBackgroundColor(bgColor);
 
-
+            holder.mTimeTextView.setText(item.getMerchantData().getMerchantProfile().getMerchantCode());
             holder.mToDoTextview.setText(item.getTransactionData().getTransactionCode());
 
         }

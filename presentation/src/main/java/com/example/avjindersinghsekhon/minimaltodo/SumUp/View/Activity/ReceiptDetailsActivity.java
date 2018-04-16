@@ -20,12 +20,18 @@ import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.ReceiptPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.ProductsAdapter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.ReceiptView;
+import com.example.avjindersinghsekhon.minimaltodo.Utility.DateUtils;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -40,33 +46,41 @@ public class ReceiptDetailsActivity extends AppCompatActivity
     @Inject
     ReceiptPresenter mReceiptPresenter;
 
+    @BindView(R.id.business_name)
     TextView mBusinessName;
+
+    @BindView(R.id.transaction_code)
     TextView mTransactionCode;
+
+    @BindView(R.id.total_amount_value)
     TextView mTotalAmount;
+
+    @BindView(R.id.receipt_date)
     TextView mInvoiceDate;
+
+    @BindView(R.id.loading)
     ProgressBar mLoading;
+
+    @BindView(R.id.main_cointainer)
     CoordinatorLayout mMainContainer;
+
+    @BindView(R.id.products)
     RecyclerView mRVProducts;
+
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
 
     List<Product> products = new ArrayList<>();
     ProductsAdapter mProductAdapter;
+    Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipt_details);
-
-        mBusinessName = findViewById(R.id.business_name);
-        mTransactionCode = findViewById(R.id.transaction_code);
-        mTotalAmount = findViewById(R.id.total_amount_value);
-        mInvoiceDate = findViewById(R.id.receipt_date);
-        mRVProducts = findViewById(R.id.products);
-        mLoading = findViewById(R.id.loading);
-        mMainContainer = findViewById(R.id.main_cointainer);
-        mToolbar = findViewById(R.id.toolbar);
+        mUnbinder = ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,15 +88,12 @@ public class ReceiptDetailsActivity extends AppCompatActivity
         mToolbar.setTitle("");
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-
         mMainContainer.setVisibility(View.INVISIBLE);
-
         mRVProducts.setHasFixedSize(true);
         mRVProducts.setItemAnimator(new DefaultItemAnimator());
         mRVProducts.setLayoutManager(new LinearLayoutManager(this));
         mProductAdapter = new ProductsAdapter(products);
         mRVProducts.setAdapter(mProductAdapter);
-
         mReceiptPresenter.setView(this);
 
 
@@ -108,6 +119,15 @@ public class ReceiptDetailsActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onDestroy() {
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
+        super.onDestroy();
+
+    }
+
+    @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
     }
@@ -115,14 +135,18 @@ public class ReceiptDetailsActivity extends AppCompatActivity
     @Override
     public void onSuccess(Object data) {
 
-
         mLoading.setVisibility(View.GONE);
         mMainContainer.setVisibility(View.VISIBLE);
+
         PaymentReceipt paymentReceipt = (PaymentReceipt) data;
         mTotalAmount.setText(String.valueOf(paymentReceipt.getTransactionData().getAmount()));
         mBusinessName.setText(paymentReceipt.getMerchantData().getMerchantProfile().getBusinessName());
         mTransactionCode.setText(paymentReceipt.getTransactionData().getTransactionCode());
         mToolbar.setTitle(paymentReceipt.getTransactionData().getReceiptNum());
+
+        String date = DateUtils.parseDate(paymentReceipt.getTransactionData().getTimeStamp());
+        mInvoiceDate.setText(date);
+
 
         List<Product> products = paymentReceipt.getTransactionData().getProducts();
         mProductAdapter.setData(products);

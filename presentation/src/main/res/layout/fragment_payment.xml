@@ -1,54 +1,50 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:animateLayoutChanges="true"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    >
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/base_toolbar"/>
+    <include layout="@layout/base_toolbar" />
 
     <android.support.design.widget.CoordinatorLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:background="?attr/colorPrimary"
                 android:id="@+id/editTextParentLinearLayout"
-                android:gravity="center"
-                android:layout_weight=".5"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical">
 
 
                 <com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout
-                    app:hintTextAppearance="@style/FloatingLabelTextAppearance"
                     android:id="@+id/toDoCustomTextInput"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:gravity="center"
+                    app:hintTextAppearance="@style/FloatingLabelTextAppearance">
 
                     <EditText
                         android:id="@+id/userToDoEditText"
-                        android:hint="@string/title"
-                        android:lines="1"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:textColor="@color/icons"
-                        android:gravity="start|bottom"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginLeft="32dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="32dp"
+                        android:gravity="start|bottom"
+                        android:hint="@string/title"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textColor="@color/icons" />
 
                 </com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout>
 
@@ -56,34 +52,32 @@
 
             <LinearLayout
                 android:id="@+id/todoReminderAndDateContainerLayout"
-                android:layout_weight="1.5"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="0dp">
-
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
 
 
                 <com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout
-                    app:hintTextAppearance="@style/FloatingLabelTextAppearance"
                     android:id="@+id/receiptEmailInputLayout"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    app:hintTextAppearance="@style/FloatingLabelTextAppearance">
 
                     <EditText
                         android:id="@+id/receiptEmailET"
-                        android:hint="Receipt Email"
-                        android:lines="2"
-                        android:inputType="textAutoCorrect|textCapSentences|textEmailAddress"
-                        android:maxLines="1"
-                        android:textColor="@color/icons"
-                        android:gravity="start|bottom"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginLeft="32dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="32dp"
+                        android:gravity="start|bottom"
+                        android:hint="Receipt Email"
+                        android:inputType="textAutoCorrect|textCapSentences|textEmailAddress"
+                        android:lines="2"
+                        android:maxLines="1"
+                        android:textColor="@color/icons" />
 
 
                 </com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout>
@@ -91,26 +85,25 @@
 
                 <!-- Sms -->
                 <com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout
-                    app:hintTextAppearance="@style/FloatingLabelTextAppearance"
-                    android:layout_marginTop="8dp"
                     android:id="@+id/smsInputLayout"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    app:hintTextAppearance="@style/FloatingLabelTextAppearance">
 
                     <EditText
                         android:id="@+id/smsET"
-                        android:hint="Receipt Sms"
-                        android:lines="2"
-                        android:inputType="textCapSentences|phone"
-                        android:maxLines="1"
-                        android:textColor="@color/icons"
-                        android:gravity="start|bottom"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginLeft="32dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginRight="32dp"
+                        android:gravity="start|bottom"
+                        android:hint="Receipt Sms"
+                        android:inputType="textCapSentences|phone"
+                        android:lines="2"
+                        android:maxLines="1"
+                        android:textColor="@color/icons" />
 
 
                 </com.example.avjindersinghsekhon.minimaltodo.Utility.CustomTextInputLayout>
@@ -118,19 +111,18 @@
 
             </LinearLayout>
 
-        <!-- -->
+            <!-- -->
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/makeToDoFloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_payment_white_24dp"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@id/editTextParentLinearLayout"
-            app:layout_anchorGravity="bottom|right"
             app:fabSize="normal"
-            android:layout_width="wrap_content"
-            />
+            app:layout_anchor="@id/editTextParentLinearLayout"
+            app:layout_anchorGravity="bottom|right" />
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

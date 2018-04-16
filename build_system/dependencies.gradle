@@ -20,6 +20,7 @@ ext{
     dagger = '2.14.1'
     javax_annotation = '1.0'
     javax_inject = '1'
+    butterknife = '8.8.1'
 
     //Testing
     jUnitVersion = '4.12'
@@ -48,6 +49,8 @@ ext{
             javax_inject: "javax.inject:javax.inject:$javax_inject",
             dagger_processor: "com.google.dagger:dagger-android-processor:$dagger",
             rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
+            butterknife:                        "com.jakewharton:butterknife:${butterknife}",
+            annotation_butterknife:              "com.jakewharton:butterknife-compiler:${butterknife}"
     ]
 
     domainDependencies = [
