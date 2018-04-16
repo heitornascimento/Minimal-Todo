@@ -1,0 +1,25 @@
+apply plugin: 'java-library'
+
+
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def domainDependencies = rootProject.ext.domainDependencies
+
+    implementation domainDependencies.rx_java
+    implementation domainDependencies.rx_android
+    implementation domainDependencies.android_annotation
+    implementation domainDependencies.gson
+
+    testImplementation domainTestDependencies.junit
+    testImplementation domainTestDependencies.mockito
+    testImplementation domainTestDependencies.assertj
+
+}
