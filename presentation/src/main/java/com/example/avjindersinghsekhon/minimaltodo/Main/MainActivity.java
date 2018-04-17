@@ -14,19 +14,10 @@ import com.example.avjindersinghsekhon.minimaltodo.About.AboutActivity;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.Settings.SettingsActivity;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Base.BaseView;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.Presenter.ReceiptPresenter;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.ReceiptFragment;
 import com.sumup.merchant.api.SumUpAPI;
 
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
-
-public class MainActivity extends AppDefaultActivity  {
+public class MainActivity extends AppDefaultActivity implements ReceiptFragment.OnFragmentConnectivityListener {
 
     private static final String KEY = "b18d7ae1-455d-4a58-8299-0e684c60c51c";
 
@@ -109,6 +100,11 @@ public class MainActivity extends AppDefaultActivity  {
         login.startAuthentication(this);
     }
 
+
+    @Override
+    public boolean hasInternet() {
+        return isThereInternetConnection(this);
+    }
 }
 
 

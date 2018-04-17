@@ -17,6 +17,8 @@ import com.sumup.data.repository.ReceiptRepositoryImpl;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Module
 public class ApplicationModule {
@@ -28,27 +30,27 @@ public class ApplicationModule {
     }
 
     @Provides
-    public SumUpService provieSumUpService() {
+    public SumUpService provideSumUpService() {
         return Injector.provideSumUpService();
     }
 
     @Provides
-    public SumUpEndpoint proviceSumUpEndpoint(SumUpService sumUpService) {
+    public SumUpEndpoint provideSumUpEndpoint(SumUpService sumUpService) {
         return new SumUpEndpoint(sumUpService);
     }
 
     @Provides
-    public ReceiptRepository provideReceitpRepository(SumUpEndpoint endpoint) {
+    public ReceiptRepository provideReceiptRepository(SumUpEndpoint endpoint) {
         return new ReceiptRepositoryImpl(endpoint);
     }
 
     @Provides
     public ReceiptUseCase provideReceiptUseCase(ReceiptRepository receiptRepository) {
-        return new ReceiptUseCase(receiptRepository);
+        return new ReceiptUseCase(receiptRepository, Schedulers.io(), AndroidSchedulers.mainThread());
     }
 
     @Provides
-    public ReceiptPresenter provideReceitpPresenter(ReceiptUseCase receiptUseCase) {
+    public ReceiptPresenter provideReceiptPresenter(ReceiptUseCase receiptUseCase) {
         return new ReceiptPresenter(receiptUseCase);
     }
 

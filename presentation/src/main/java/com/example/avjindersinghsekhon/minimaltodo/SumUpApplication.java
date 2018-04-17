@@ -1,9 +1,10 @@
 package com.example.avjindersinghsekhon.minimaltodo;
 
 import android.app.Activity;
-import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
-//import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Component.DaggerApplicationComponent;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.DI.Component.DaggerApplicationComponent;
 import com.sumup.merchant.api.SumUpState;
 
@@ -14,12 +15,17 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
 
-public class SumUpApplication extends Application implements HasActivityInjector{
+public class SumUpApplication extends MultiDexApplication implements HasActivityInjector{
 
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
 
     @Override
     public void onCreate() {

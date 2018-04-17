@@ -18,6 +18,8 @@ android {
         targetSdkVersion 27
         versionCode 3
         versionName "1.2"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testApplicationId "com.example.avjindersinghsekhon.minimaltodo.presentation.test"
     }
     buildTypes {
         release {
@@ -25,7 +27,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/', 'src/androidTest/assets']
+        }
+    }
     lintOptions {
         abortOnError false
     }
@@ -34,6 +40,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+ext {
+    espresso = "2.2.2"
 }
 
 dependencies {
@@ -66,9 +76,22 @@ dependencies {
 
     //==== RXJava
     implementation presentationDependencies.rx_java
+    implementation presentationDependencies.rx_android
 
     //=== ButterKnife
     implementation presentationDependencies.butterknife
     annotationProcessor presentationDependencies.annotation_butterknife
 
+    //=== Test ===
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.mockito
+    testImplementation presentationTestDependencies.assertj
+
+    //==== Espresso Test ==
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${espresso}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+    implementation presentationDependencies.multiDex
 }

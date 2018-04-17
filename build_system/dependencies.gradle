@@ -29,6 +29,12 @@ ext{
     dexmakerVersion = '1.0'
     espressoVersion = '2.0'
     testingSupportLibVersion = '0.1'
+    idlingEspresso =         '3.0.1'
+    idlingOkHttp =          '1.0.0'
+    espresso =              '2.2.2'
+
+    //MultiDex
+    multiDex =              '1.0.1'
 
     dataDependencies = [
             retrofit:                           "com.squareup.retrofit2:retrofit:${retrofit}",
@@ -50,7 +56,9 @@ ext{
             dagger_processor: "com.google.dagger:dagger-android-processor:$dagger",
             rx_java:                            "io.reactivex.rxjava2:rxjava:${rxJava}",
             butterknife:                        "com.jakewharton:butterknife:${butterknife}",
-            annotation_butterknife:              "com.jakewharton:butterknife-compiler:${butterknife}"
+            annotation_butterknife:              "com.jakewharton:butterknife-compiler:${butterknife}",
+            rx_android:                         "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            multiDex:                           "com.android.support:multidex:${multiDex}"
     ]
 
     domainDependencies = [
@@ -64,6 +72,22 @@ ext{
             junit:              "junit:junit:${jUnitVersion}",
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
             assertj:            "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            idlingEspresso:     "com.android.support.test.espresso.idling:idling-concurrent:${idlingEspresso}",
+            idlingOkHttp:       "com.jakewharton.espresso:okhttp3-idling-resource:${idlingOkHttp}",
+            espresso:           "com.android.support.test.espresso:espresso-core:${espresso}"
+    ]
+
+    presentationTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            espresso:           "com.android.support.test.espresso:espresso-core:${espresso}"
     ]
 
 }

@@ -26,6 +26,12 @@ android {
 
 }
 
+ext {
+    idling_concurrent = '3.0.1'
+    idling_resource = "1.0.0"
+    espresso = "2.2.2"
+}
+
 dependencies {
 //    implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation 'com.android.support:appcompat-v7:27.1.0'
@@ -35,6 +41,7 @@ dependencies {
     implementation project(':domain')
 
     def dataDependencies = rootProject.ext.dataDependencies
+    def dataTestDependencies = rootProject.ext.dataTestDependencies
 
     implementation dataDependencies.rx_java
     implementation dataDependencies.rx_android
@@ -42,5 +49,19 @@ dependencies {
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofit_gson_converter
     implementation dataDependencies.okhttp_log_interceptor
+
+    testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.mockito
+    testImplementation dataTestDependencies.assertj
+
+    //=== Espresso Test ===
+    debugImplementation "com.android.support.test.espresso.idling:idling-concurrent:${idling_concurrent}"
+    debugImplementation("com.jakewharton.espresso:okhttp3-idling-resource:${idling_resource}") {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${espresso}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
 
 }

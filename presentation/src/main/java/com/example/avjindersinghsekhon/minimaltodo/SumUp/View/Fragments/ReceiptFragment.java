@@ -1,9 +1,11 @@
 package com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -61,6 +63,7 @@ public class ReceiptFragment extends AppDefaultFragment {
     public static final String DARKTHEME = "com.avjindersekon.darktheme";
     public static final String LIGHTTHEME = "com.avjindersekon.lighttheme";
 
+    private OnFragmentConnectivityListener onFragmentConnectivityListener;
 
     @Override
     protected int layoutRes() {
@@ -144,6 +147,13 @@ public class ReceiptFragment extends AppDefaultFragment {
         });
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentConnectivityListener) {
+            this.onFragmentConnectivityListener = (OnFragmentConnectivityListener) context;
+        }
+    }
 
     public class BasicListAdapter extends RecyclerView.Adapter<ReceiptFragment.BasicListAdapter.ViewHolder> implements ItemTouchHelperClass.ItemTouchHelperAdapter {
 
@@ -227,8 +237,12 @@ public class ReceiptFragment extends AppDefaultFragment {
                 super(v);
                 mView = v;
                 v.setOnClickListener(v1 -> {
-                    Intent intent = new Intent(getActivity(), ReceiptDetailsActivity.class);
-                    getActivity().startActivity(intent);
+                    if (onFragmentConnectivityListener.hasInternet()) {
+                        Intent intent = new Intent(getActivity(), ReceiptDetailsActivity.class);
+                        getActivity().startActivity(intent);
+                    } else {
+                        showSnackBarError();
+                    }
                 });
                 mToDoTextview = (TextView) v.findViewById(R.id.toDoListItemTextview);
                 mTimeTextView = (TextView) v.findViewById(R.id.todoListItemTimeTextView);
@@ -263,5 +277,16 @@ public class ReceiptFragment extends AppDefaultFragment {
         return new ReceiptFragment();
     }
 
+    private void showSnackBarError() {
+        Snackbar snackbar = Snackbar.make(mCoordLayout, getString(R.string.no_internet), Snackbar.LENGTH_LONG);
+        View view = snackbar.getView();
+        TextView textView = view.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.RED);
+        snackbar.show();
+    }
+
+    public interface OnFragmentConnectivityListener {
+        boolean hasInternet();
+    }
 
 }
