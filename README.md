@@ -5,8 +5,8 @@
 * Clean Architecture 
 * MVP(Model View Presenter)
 * Divides in four modules such as Presentation, Domain, Data and Payment.
-* Payment modules wraps Sumup SDK.
-* All dependencies within build system folder.
+* Payment modules encapsulates Sumup SDK.
+* All dependencies are in the build system folder.
 
 ## Libraries
 
@@ -16,11 +16,21 @@
 * RxJava2
 * ButterKnife
 * Constraintlayout
+* Idling Resource (Espresso test, debug version only)
 
 ## Test
 
 * Unit Test for each module
 * Instrumentation Test for Receipt Details View
+
+## Demo
+
+![](https://media.giphy.com/media/3OCI3gtzpax9C6O7Qj/giphy.gif)
+
+### Comments
+
+The Minimal-Todo repository has a couple issues, first one was a conflict with Analytics e package, so I remove as the analytics depedencies.
+The second one was a compilation error in layout within the Coordinator layout
 
 
 
