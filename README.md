@@ -1,3 +1,28 @@
+# Sumup Demo App
+
+## Architecture
+
+* Clean Architecture 
+* MVP(Model View Presenter)
+* Divides in four modules such as Presentation, Domain, Data and Payment.
+* Payment modules wraps Sumup SDK.
+
+## Libraries
+
+* Retrofit 
+* OkHttp
+* Dagger
+* RxJava2
+* ButterKnife
+
+## Test
+
+* Unit Test for each module
+* Instrumentation Test for Receipt Details View
+
+
+
+
 # Minimal ![Build Status](https://travis-ci.org/avjinder/Minimal-Todo.svg?branch=master)
 
 <img src="/screenshots/app_icon.png" height="200px"/> <br>
