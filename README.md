@@ -25,7 +25,7 @@
 
 ## Demo
 
-![](https://media.giphy.com/media/3OCI3gtzpax9C6O7Qj/giphy.gif)
+
 
 ### Comments
 
