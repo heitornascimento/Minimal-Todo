@@ -6,6 +6,7 @@
 * MVP(Model View Presenter)
 * Divides in four modules such as Presentation, Domain, Data and Payment.
 * Payment modules wraps Sumup SDK.
+* All dependencies within build system folder.
 
 ## Libraries
 
