@@ -23,8 +23,7 @@ public class PaymentPresenter implements BasePresenter {
 
     public void pay(@NonNull Activity target, @NonNull PaymentParam param) throws SumUpDemoException {
 
-        if ((param == null) || param.getProductAmount() < 0 ||
-                param.getReceiptEmail().isEmpty() || param.getReceiptSms().isEmpty()) {
+        if ((param == null) || param.getProductAmount() < 0 ) {
             throw new SumUpDemoException("PaymentExecutor cannot be null");
         }
 
@@ -40,6 +39,10 @@ public class PaymentPresenter implements BasePresenter {
             mPaymentExecutor.pay(target, param);
         }
 
+    }
+
+    public boolean isValid(@NonNull double value) {
+        return value < 1.0d ? false : true;
     }
 
 

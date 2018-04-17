@@ -15,6 +15,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import io.reactivex.Scheduler;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ReceiptUseCaseTest {
 
@@ -23,6 +25,12 @@ public class ReceiptUseCaseTest {
 
     ReceiptUseCase receiptUseCase;
 
+    @Mock
+    Scheduler mThreadExecutor;
+
+    @Mock
+    Scheduler mPostExecutor;
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -30,7 +38,7 @@ public class ReceiptUseCaseTest {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        receiptUseCase = new ReceiptUseCase(receiptRepository);
+        receiptUseCase = new ReceiptUseCase(receiptRepository, mThreadExecutor, mPostExecutor);
     }
 
     @Test

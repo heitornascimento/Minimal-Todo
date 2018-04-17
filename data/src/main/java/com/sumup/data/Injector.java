@@ -2,6 +2,7 @@ package com.sumup.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sumup.data.IdlingResources;
 import com.sumup.data.api.SumUpService;
 
 import java.util.Date;
@@ -21,9 +22,16 @@ public class Injector {
 
     public static OkHttpClient okHttpClient;
 
-    private static Retrofit provideRetrofit(String baseUrl){
+    private static Retrofit provideRetrofit(String baseUrl) {
+
+        OkHttpClient client = getHttpClient();
+
+        if(BuildConfig.DEBUG){
+            IdlingResources.registerOkHttp(client);
+        }
+
         return new Retrofit.Builder().baseUrl(baseUrl)
-                .client(getHttpClient())
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(getGson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
@@ -46,7 +54,7 @@ public class Injector {
         return builder.create();
     }
 
-    public static SumUpService provideSumUpService(){
-       return provideRetrofit(BuildConfig.SUMUP_URL).create(SumUpService.class);
+    public static SumUpService provideSumUpService() {
+        return provideRetrofit(BuildConfig.SUMUP_URL).create(SumUpService.class);
     }
 }

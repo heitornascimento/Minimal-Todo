@@ -29,34 +29,49 @@ public class ReceiptPresenter implements BasePresenter {
         this.mReceiptUseCase = receiptUseCase;
     }
 
-
-    public void subscribePaymentReceipt(final String transactionCode, final String merchantCode) throws SumUpInvalidParamReceiptException {
-
-        if (isResumed) {
-            ReceiptParam receiptParam = new ReceiptParam(transactionCode, merchantCode);
-            mReceiptUseCase.buildObservable(receiptParam).subscribe(new SingleObserver() {
-                @Override
-                public void onSubscribe(Disposable d) {
-                    Log.i("sumup", "disposable " + d);
-                }
-
-                @Override
-                public void onSuccess(Object o) {
-                    mReceiptView.onSuccess(o);
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    mReceiptView.onError(500, e.getMessage());
-                }
-            });
-        }
-
-    }
-
     public void setView(ReceiptView receiptView) {
         this.mReceiptView = receiptView;
     }
+
+
+    public void subscribePaymentReceipt(ReceiptParam receiptParam) throws SumUpInvalidParamReceiptException {
+        if (isResumed) {
+
+            if (receiptParam == null) {
+                throw new NullPointerException("param is null");
+            }
+
+            if (receiptParam.getTransactionCode() == null
+                    || receiptParam.getTransactionCode().isEmpty()) {
+                throw new NullPointerException("transaction code is null");
+            }
+
+            if (receiptParam.getMerchantCode() == null
+                    || receiptParam.getMerchantCode().isEmpty()) {
+                throw new NullPointerException("merchant code is null");
+            }
+
+            mReceiptUseCase.execute(singleObserver, receiptParam);
+        }
+    }
+
+
+    SingleObserver singleObserver = new SingleObserver() {
+        @Override
+        public void onSubscribe(Disposable d) {
+            Log.i("sumup", "disposable " + d);
+        }
+
+        @Override
+        public void onSuccess(Object o) {
+            mReceiptView.onSuccess(o);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            mReceiptView.onError(500, e.getMessage());
+        }
+    };
 
     @Override
     public void onResume() {

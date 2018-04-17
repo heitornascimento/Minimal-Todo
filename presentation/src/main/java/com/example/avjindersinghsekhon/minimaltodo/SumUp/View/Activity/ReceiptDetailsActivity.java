@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.sumup.payment.domain.exception.SumUpInvalidParamReceiptException;
+import com.app.sumup.payment.domain.model.ReceiptParam;
 import com.app.sumup.payment.domain.model.receipt.PaymentReceipt;
 import com.app.sumup.payment.domain.model.receipt.Product;
 import com.example.avjindersinghsekhon.minimaltodo.R;
@@ -37,7 +38,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class ReceiptDetailsActivity extends AppCompatActivity
+public class ReceiptDetailsActivity extends BaseActivity
         implements HasSupportFragmentInjector, ReceiptView {
 
     @Inject
@@ -98,7 +99,9 @@ public class ReceiptDetailsActivity extends AppCompatActivity
 
 
         try {
-            mReceiptPresenter.subscribePaymentReceipt("TCX9APHT2Z", "M4AR96RP");
+           ReceiptParam receiptParam =
+                   new ReceiptParam("TCX9APHT2Z", "M4AR96RP");
+            mReceiptPresenter.subscribePaymentReceipt(receiptParam);
         } catch (SumUpInvalidParamReceiptException e) {
             onError(500, "");
         }

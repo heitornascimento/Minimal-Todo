@@ -1,5 +1,6 @@
 package com.example.avjindersinghsekhon.minimaltodo.AddToDo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -7,7 +8,6 @@ import android.support.v4.app.Fragment;
 import com.example.avjindersinghsekhon.minimaltodo.AppDefault.AppDefaultActivity;
 import com.example.avjindersinghsekhon.minimaltodo.R;
 import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.PaymentFragment;
-import com.example.avjindersinghsekhon.minimaltodo.SumUp.View.Fragments.ReceiptFragment;
 
 import javax.inject.Inject;
 
@@ -48,6 +48,15 @@ public class AddToDoActivity extends AppDefaultActivity implements HasSupportFra
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 2 && resultCode == 1){
+            //Success
+        }
     }
 }
 
